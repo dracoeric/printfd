@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:22:53 by erli              #+#    #+#             */
-/*   Updated: 2019/02/22 18:27:16 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/24 18:00:50 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ int			ft_printfd(int fd, char *format, ...)
 	va_list		ap;
 	int			ret;
 
+	ap = NULL;
 	if (format == NULL)
 		return (ft_msg_int(2, "ft_printfd: Null format string.\n", -1));
 	ret = pfd_init_data(data, fd);
 	i = 0;
 	va_start(ap, format);
+	if (ap == NULL)
+		return (ft_msg_int(2, "va_start failed.\n", -1));
 	while (format[i] != '\0' && ret > 0)
 	{
 		while (format[i] != '%' && format[i] != '\0' && ret > 0)

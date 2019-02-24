@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pfd_manage_tag.c                                   :+:      :+:    :+:   */
+/*   pfd_convert.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 18:06:23 by erli              #+#    #+#             */
-/*   Updated: 2019/02/24 18:16:00 by erli             ###   ########.fr       */
+/*   Created: 2019/02/24 18:40:33 by erli              #+#    #+#             */
+/*   Updated: 2019/02/24 18:42:11 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
 
 /*
-** Manage_tag manages the %~~~ tag, treat it correctly then write the content
-** in the buffer
+** Retrieve the argument in the va_list, manage the formating and writes it in
+** buf;
 */
 
-int			pfd_manage_tag(t_pfd_data *data, char *format, va_list ap,
-				size_t *i)
+int				pfd_convert(t_pfd_data *data, va_list ap)
 {
-	t_pdf_tag	tag[1];
-	int			ret;
-	
-	ft_bzero(tag, sizeof(t_pdf_tag));
-	data->tag = tag;
-	if ((ret = pfd_read_tag(data, format, ++(*i))) < 0)
+	if (data == 0 || ap == 0)
 		return (-1);
-	else if (ret == 0)
-		return (1);
-	if (pfd_convert(data, ap) < 0)
-		return (-1);
-	return (1);
+	return (0);
 }

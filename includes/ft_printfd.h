@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:27:46 by erli              #+#    #+#             */
-/*   Updated: 2019/02/22 18:24:52 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/24 18:15:39 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,7 @@ int					pfd_add_char(t_pfd_data *data, char c);
 int					pfd_unload_buf(t_pfd_data *data);
 int					pfd_manage_tag(t_pfd_data *data, char *format,
 						va_list ap, size_t *i);
+int					pfd_read_tag(t_pfd_data *data, char *format, int *i);
+int					pfd_convert(t_pfd_data *data, va_list ap);
+
 #endif

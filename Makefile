@@ -6,7 +6,7 @@
 #    By: erli <erli@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/22 12:53:22 by erli              #+#    #+#              #
-#    Updated: 2019/02/22 18:11:31 by erli             ###   ########.fr        #
+#    Updated: 2019/02/24 18:14:44 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@ SRCSDIR			=		srcs
 OBJSDIR			=		objs
 
 SRCS			=		main_printfd.c			pfd_add_char.c		pfd_unload_buf.c\
-						pfd_manage_tag.c											\
+						pfd_manage_tag.c		pfd_read_tag.c		pfd_convert.c	\
 																					\
 						main.c
 
