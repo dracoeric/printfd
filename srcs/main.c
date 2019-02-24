@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:21:45 by erli              #+#    #+#             */
-/*   Updated: 2019/02/22 18:17:38 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/24 18:58:18 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		main(void)
 {
 	int	ret;
 
-	ret = ft_printfd(1, "");
+	ret = ft_printf("%4.3#ll", "caca");
 	ft_putnbr(ret);
 	return (0);
 }
