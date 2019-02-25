@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 18:40:33 by erli              #+#    #+#             */
-/*   Updated: 2019/02/24 18:42:11 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/25 14:17:01 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,17 @@
 ** buf;
 */
 
-int				pfd_convert(t_pfd_data *data, va_list ap)
+static	t_pfd_conv	pfd_get_converter(int flags)
 {
-	if (data == 0 || ap == 0)
-		return (-1);
-	return (0);
+	if (flags & D_CONV)
+		return (&pfd_conv_d);
+	return (&pfd_no_conv);
+}
+
+int					pfd_convert(t_pfd_data *data, va_list ap)
+{
+	t_pfd_conv converter;
+
+	converter = pfd_get_converter(data->tag->flags);
+	return (converter(data, ap));
 }

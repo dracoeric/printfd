@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2019/02/22 14:41:13 by erli             ###   ########.fr        #
+#    Updated: 2019/02/25 10:29:52 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -86,7 +86,7 @@ RM			=		rm -f
 all			:		$(NAME)
 
 $(NAME)		:		$(OBJS) $(HEADER)
-					ar -rucs $(NAME) $(OBJS)
+					@ar -rucs $(NAME) $(OBJS)
 
 $(OBJSDIR)/%.o			:		$(SRCSDIR)/%.c
 					@mkdir -p $(OBJSDIR)

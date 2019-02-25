@@ -6,7 +6,7 @@
 #    By: erli <erli@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/22 12:53:22 by erli              #+#    #+#              #
-#    Updated: 2019/02/24 18:14:44 by erli             ###   ########.fr        #
+#    Updated: 2019/02/25 14:16:26 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,6 +19,8 @@ OBJSDIR			=		objs
 SRCS			=		main_printfd.c			pfd_add_char.c		pfd_unload_buf.c\
 						pfd_manage_tag.c		pfd_read_tag.c		pfd_convert.c	\
 																					\
+						pfd_no_conv.c			pfd_conv_d.c		\
+						pfd_print_data.c											\
 						main.c
 
 OBJS			=		$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
@@ -53,10 +55,20 @@ libft			:
 
 $(OBJSDIR)/%.o	:		$(SRCSDIR)/%.c $(HEADER)
 						@mkdir -p $(OBJSDIR)
+						@echo "Compiling: " $(GREEN) $@ $(DEFAULT)
 						$(CC) -c $(CFLAGS) $(INCL) $< -o $@
 
 norm			:		delsav
-						norminette $(SRCDIR) includes/ libft/srcs libft/includes
+						make -C libft delsav
+						@echo "==== Norme"  $(GREEN) $(SRCSDIR) $(DEFAULT) "===="
+						norminette $(SRCSDIR) 
+						@echo "==== Norme"  $(GREEN) "includes/" $(DEFAULT) "===="
+						norminette includes/
+						@echo "==== Norme"  $(GREEN) "libft/includes/" \
+						$(DEFAULT) "===="
+						norminette libft/includes 
+						@echo "==== Norme"  $(GREEN) "libft/srcs/" $(DEFAULT) "===="
+						norminette libft/srcs/ 
 
 delsav			:
 						$(RM) *~

@@ -6,12 +6,95 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 18:35:16 by erli              #+#    #+#             */
-/*   Updated: 2019/02/24 19:26:25 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/25 15:43:34 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
 #include "libft.h"
+
+/*
+** Reads and light format flags "0# -+"
+*/
+
+static	void	pfd_read_flags(t_pfd_tag *tag, char *format, size_t *i)
+{
+	while (format[*i] != '\0' && ft_char_at_pos(format[*i], FORMAT_FLAGS) >= 0)
+	{
+		if (format[*i] == '0' && (tag->flags & MINUS) == 0)
+			tag->flags = (tag->flags | ZERO);
+		else if (format[*i] == ' ' && (tag->flags & PLUS) == 0)
+			tag->flags = (tag->flags | SPACE);
+		else if (format[*i] == '-')
+			tag->flags = (tag->flags | MINUS) - (tag->flags & ZERO);
+		else if (format[*i] == '+')
+			tag->flags = (tag->flags | PLUS) - (tag->flags & SPACE);
+		else if (format[*i] == '#')
+			tag->flags = (tag->flags | POUND);
+		*i += 1;
+	}
+}
+
+static	int		pfd_atoi(char *format, size_t *i)
+{
+	int nb;
+
+	nb = 0;
+	while (ft_isdigit(format[*i]) > 0)
+	{
+		nb = (nb * 10) + (int)(format[*i] - '0');
+		*i += 1;
+	}
+	return (nb);
+}
+
+/*
+** Reads width if first char is digit != '0', and read precision if format[*i]
+** is '.'
+*/
+
+static	void	pfd_read_width_and_prec(t_pfd_tag *tag, char *format,
+					size_t *i)
+{
+	if (format[*i] != '\0' && ft_isdigit(format[*i]) > 0)
+		tag->width = pfd_atoi(format, i);
+	else if (format[*i] != '\0' && format[*i] == '.')
+	{
+		*i += 1;
+		tag->precision = pfd_atoi(format, i);
+	}
+}
+
+/*
+** Reads and store modifiers. Modifiers must be followed by a conversion.
+** Sensible to .h changes
+*/
+
+static	void	pfd_read_mod(t_pfd_tag *tag, char *format,
+					size_t *i)
+{
+	int pos;
+
+	while (format[*i] != '\0'
+		&& (pos = ft_char_at_pos(format[*i], MODIFIERS)) >= 0)
+	{
+		if (format[*i] == 'l' && format[*i + 1] == 'l')
+		{
+			tag->flags = ((tag->flags % HH_MOD) | LL_MOD);
+			*i += 1;
+		}
+		else if (format[*i] == 'h' && format[*i + 1] == 'h')
+		{
+			tag->flags = ((tag->flags % HH_MOD) | HH_MOD);
+			*i += 1;
+		}
+		else if (pos < 3)
+			tag->flags = ((tag->flags % HH_MOD) | (H_MOD << pos));
+		else if (pos < 6)
+			tag->flags = ((tag->flags & (-1 - (3 << 10))) | (H_MOD << pos));
+		*i += 1;
+	}
+}
 
 /*
 ** Exctract tag information and move cursor to first caracter after conversion
@@ -21,15 +104,24 @@
 
 int				pfd_read_tag(t_pfd_data *data, char *format, size_t *i)
 {
-	while (format[*i] != '\0' && ft_char_at_pos(format[*i], format_flags) > 0)
+	int	pos;
+
+	while (format[*i] != '\0' && ft_char_at_pos(format[*i], TAG_CHARS) >= 0
+		&& data->tag->flags >> 13 == 0)
 	{
-
-
-
+		pfd_read_flags(data->tag, format, i);
+		pfd_read_width_and_prec(data->tag, format, i);
+		pfd_read_mod(data->tag, format, i);
+		pos = ft_char_at_pos(format[*i], CONVERSION);
+		if (format[*i] != '\0' && pos >= 0)
+		{
+			data->tag->flags = (data->tag->flags | (D_CONV << pos));
+			*i += 1;
+		}
 	}
-	
-	if (data == 0 || format == 0 || i == 0)
-		return (-1);
-	return (0);
+	if (data->tag->flags >> 13 == 0)
+		data->tag->flags = (data->tag->flags | NO_CONV);
+	if (data->tag->width < 0 || data->tag->precision < 0)
+		return (ft_msg_int(2, "Invalid width or precision (overflow).\n", -1));
+	return (1);
 }
-

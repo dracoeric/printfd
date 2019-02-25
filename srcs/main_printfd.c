@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:22:53 by erli              #+#    #+#             */
-/*   Updated: 2019/02/24 18:44:25 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/25 10:46:51 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static	int	pfd_init_data(t_pfd_data *data, int fd)
 {
 	if (write(fd, "", 0) < 0)
-		return (ft_msg_int(2, "ft_printfd: could not write in file des.\n",-1));
+		return (ft_msg_int(2, "ft_printfd: could not write in fd.\n", -1));
 	ft_bzero(data, sizeof(t_pfd_data));
 	data->fd = fd;
 	return (1);

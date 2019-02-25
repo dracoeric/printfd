@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pfd_conv_d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 14:21:45 by erli              #+#    #+#             */
-/*   Updated: 2019/02/25 15:44:03 by erli             ###   ########.fr       */
+/*   Created: 2019/02/25 13:52:47 by erli              #+#    #+#             */
+/*   Updated: 2019/02/25 15:15:14 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
-#include <stdio.h>
-#include "libft.h"
 
-int		main(void)
+
+int				pfd_conv_d(t_pfd_data *data, va_list ap)
 {
-	int	ret;
-
-	ret = ft_printfd(1, "f,dishfgisekjfhk %4mtm.3#llLh+020d %%", "caca");
-	ft_putnbr(ret);
+	if (data == 0 || ap == 0)
+		return (-1);
 	return (0);
 }
