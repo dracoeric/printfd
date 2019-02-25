@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 13:52:47 by erli              #+#    #+#             */
-/*   Updated: 2019/02/25 18:40:50 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/25 18:52:17 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static	int		pfd_conv_d_ptr(t_pfd_data *data, char *ptr)
 	pfd_add_char(data, '{');
 	while (i < (size_t)data->tag->nb_col)
 	{
-		if (pfd_num_to_str(data, *(long long *)(&(ptr[i * type_size]))) < 0)
+		if (pfd_num_to_str(data,
+			*(unsigned long long *)(&(ptr[i * type_size]))) < 0)
 			return (-1);
 		if (i + 1 < (size_t)data->tag->nb_col)
 			pfd_add_str(data, ", ");
@@ -66,5 +67,5 @@ int				pfd_conv_d(t_pfd_data *data, va_list ap)
 		nb = (long long)(char)va_arg(ap, int);
 	else
 		nb = (long long)va_arg(ap, int);
-	return (pfd_num_to_str(data, nb));
+	return (pfd_num_to_str(data, (unsigned long long)nb));
 }
