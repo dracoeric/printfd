@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pfd_add_char.c                                     :+:      :+:    :+:   */
+/*   pfd_num_to_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 17:34:02 by erli              #+#    #+#             */
-/*   Updated: 2019/02/25 18:22:18 by erli             ###   ########.fr       */
+/*   Created: 2019/02/25 18:32:21 by erli              #+#    #+#             */
+/*   Updated: 2019/02/25 18:34:20 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
 
-/*
-** Write a char in the buffer, if buffer is full, unloads it and bzeros it.
-*/
-
-int			pfd_add_char(t_pfd_data *data, char c)
+int			pfd_num_to_str(t_pfd_data *data, long long nb)
 {
-	if (data->cursor + 1 > PRINT_B_SIZE && pfd_unload_buf(data) < 0)
+	if (data == 0 || nb == -1)
 		return (-1);
-	data->buf[data->cursor++] = c;
 	return (1);
 }

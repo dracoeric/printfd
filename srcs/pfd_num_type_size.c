@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pfd_add_char.c                                     :+:      :+:    :+:   */
+/*   pfd_num_type_size.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 17:34:02 by erli              #+#    #+#             */
-/*   Updated: 2019/02/25 18:22:18 by erli             ###   ########.fr       */
+/*   Created: 2019/02/25 17:49:59 by erli              #+#    #+#             */
+/*   Updated: 2019/02/25 18:38:47 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
 
-/*
-** Write a char in the buffer, if buffer is full, unloads it and bzeros it.
-*/
-
-int			pfd_add_char(t_pfd_data *data, char c)
+size_t		pfd_num_type_size(int flags)
 {
-	if (data->cursor + 1 > PRINT_B_SIZE && pfd_unload_buf(data) < 0)
-		return (-1);
-	data->buf[data->cursor++] = c;
-	return (1);
+	if (flags & HH_MOD)
+		return (sizeof(char));
+	if (flags & H_MOD)
+		return (sizeof(short));
+	if (flags & L_MOD)
+		return (sizeof(long));
+	if (flags & LL_MOD)
+		return (sizeof(long long));
+	return (sizeof(int));
 }

@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 18:35:16 by erli              #+#    #+#             */
-/*   Updated: 2019/02/25 15:43:34 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/25 18:12:35 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static	void	pfd_read_mod(t_pfd_tag *tag, char *format,
 		}
 		else if (pos < 3)
 			tag->flags = ((tag->flags % HH_MOD) | (H_MOD << pos));
-		else if (pos < 6)
+		else if (pos < 5)
 			tag->flags = ((tag->flags & (-1 - (3 << 10))) | (H_MOD << pos));
 		*i += 1;
 	}
