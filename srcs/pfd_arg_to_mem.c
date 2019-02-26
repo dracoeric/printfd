@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pfd_arg_to_mem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 14:21:45 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 16:06:24 by erli             ###   ########.fr       */
+/*   Created: 2019/02/26 12:00:35 by erli              #+#    #+#             */
+/*   Updated: 2019/02/26 12:03:53 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
-#include <stdio.h>
-#include "libft.h"
-#include <stdlib.h>
-int		main(void)
-{
-	int				ret;
-	int				**mat;
 
-	mat = malloc(8);
-	mat[0] = malloc(4);
-	mat[0][0] = 33;
-	ft_printf("sizeof mat = %lu\nmat[0] = %lu\n",
-		sizeof(mat), sizeof(mat[0][0]));
-	ret = printf("%#+010%\n");
-	ft_putnbr(ret);
-	ret = ft_printfd(1, "%#0 +%", 1);
-	ft_putnbr(ret);
-	return (0);
+/*
+** Read the right amout of byte in memory pointed by ptr then right it in hex
+** in buf.
+*/
+
+int			pfd_arg_to_mem(t_pfd_data *data, void *ptr)
+{
+	if (data == 0 || ptr == 0)
+		return (-1);
+	return (1);
 }

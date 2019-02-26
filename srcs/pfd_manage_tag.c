@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:06:23 by erli              #+#    #+#             */
-/*   Updated: 2019/02/25 15:41:12 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/26 16:06:05 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,17 @@ static	void	pfd_get_row_col(t_pfd_data *data, va_list ap)
 
 static	void	pfd_harmonize_flags(t_pfd_tag *tag)
 {
-	if ((tag->flags & (63 << 13)) == 0)
+	if ((tag->flags & (63 << 14)) == 0)
 		tag->flags = (tag->flags & (-1 - (15 << 5)));
-	else if ((tag->flags & (7 << 22)) == 0)
+	if ((tag->flags & (7 << 20)) == 0)
 		tag->flags = (tag->flags & (-1 - BL_MOD));
+	if ((tag->flags & (63 << 17)) == 0)
+		tag->flags = (tag->flags & (-1 - POUND));
+	if (tag->flags & (7 << 23))
+		tag->flags = (tag->flags & (-1 - ZERO));
+	if (tag->flags & (7 << 23) || tag->flags & (15 << 16)
+		|| tag->flags & NO_CONV) 
+		tag->flags = (tag->flags & (-1 - (3 << 3)));
 }
 
 int				pfd_manage_tag(t_pfd_data *data, char *format, va_list ap,
@@ -54,9 +61,10 @@ int				pfd_manage_tag(t_pfd_data *data, char *format, va_list ap,
 	int			ret;
 
 	ft_bzero(tag, sizeof(t_pfd_tag));
+	tag->precision = -1;
 	data->tag = tag;
 	*i += 1;
-	if ((ret = pfd_read_tag(data, format, i)) < 0)
+	if ((ret = pfd_read_tag(data, format, i, ap)) < 0)
 		return (-1);
 	if (data->tag->flags & T_MOD || data->tag->flags & M_MOD)
 		pfd_get_row_col(data, ap);

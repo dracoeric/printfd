@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 18:35:16 by erli              #+#    #+#             */
-/*   Updated: 2019/02/25 18:12:35 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/26 15:12:24 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,25 @@ static	int		pfd_atoi(char *format, size_t *i)
 */
 
 static	void	pfd_read_width_and_prec(t_pfd_tag *tag, char *format,
-					size_t *i)
+					size_t *i, va_list ap)
 {
-	if (format[*i] != '\0' && ft_isdigit(format[*i]) > 0)
+	if (ft_isdigit(format[*i]) > 0)
 		tag->width = pfd_atoi(format, i);
-	else if (format[*i] != '\0' && format[*i] == '.')
+	else if (format[*i] == '*')
+	{
+		tag->width = va_arg(ap, int);
+		*i += 1;
+	}
+	else if (format[*i] == '.')
 	{
 		*i += 1;
-		tag->precision = pfd_atoi(format, i);
+		if (format[*i] == '*')
+		{
+			*i += 1;
+			tag->precision = va_arg(ap, int);
+		}
+		else if (ft_isdigit(format[*i]) > 0)
+			tag->precision = pfd_atoi(format, i);
 	}
 }
 
@@ -80,18 +91,20 @@ static	void	pfd_read_mod(t_pfd_tag *tag, char *format,
 	{
 		if (format[*i] == 'l' && format[*i + 1] == 'l')
 		{
-			tag->flags = ((tag->flags % HH_MOD) | LL_MOD);
+			tag->flags = ((tag->flags & (-1 - (31 << 5))) | LL_MOD);
 			*i += 1;
 		}
 		else if (format[*i] == 'h' && format[*i + 1] == 'h')
 		{
-			tag->flags = ((tag->flags % HH_MOD) | HH_MOD);
+			tag->flags = ((tag->flags & (-1 - (31 << 5))) | HH_MOD);
 			*i += 1;
 		}
 		else if (pos < 3)
-			tag->flags = ((tag->flags % HH_MOD) | (H_MOD << pos));
+			tag->flags = ((tag->flags & (-1 - (31 << 5))) | (H_MOD << pos));
 		else if (pos < 5)
 			tag->flags = ((tag->flags & (-1 - (3 << 10))) | (H_MOD << pos));
+		else if (pos < 7)
+			tag->flags = ((tag->flags & (-1 - (3 << 12))) | (H_MOD << pos));
 		*i += 1;
 	}
 }
@@ -102,15 +115,16 @@ static	void	pfd_read_mod(t_pfd_tag *tag, char *format,
 ** Return -1 if it encounters a non defined flags.
 */
 
-int				pfd_read_tag(t_pfd_data *data, char *format, size_t *i)
+int				pfd_read_tag(t_pfd_data *data, char *format, size_t *i,
+					va_list ap)
 {
 	int	pos;
 
 	while (format[*i] != '\0' && ft_char_at_pos(format[*i], TAG_CHARS) >= 0
-		&& data->tag->flags >> 13 == 0)
+		&& data->tag->flags >> 14 == 0)
 	{
 		pfd_read_flags(data->tag, format, i);
-		pfd_read_width_and_prec(data->tag, format, i);
+		pfd_read_width_and_prec(data->tag, format, i, ap);
 		pfd_read_mod(data->tag, format, i);
 		pos = ft_char_at_pos(format[*i], CONVERSION);
 		if (format[*i] != '\0' && pos >= 0)
@@ -119,9 +133,9 @@ int				pfd_read_tag(t_pfd_data *data, char *format, size_t *i)
 			*i += 1;
 		}
 	}
-	if (data->tag->flags >> 13 == 0)
+	if (data->tag->flags >> 14 == 0)
 		data->tag->flags = (data->tag->flags | NO_CONV);
-	if (data->tag->width < 0 || data->tag->precision < 0)
+	if (data->tag->width < 0 || data->tag->precision < -1)
 		return (ft_msg_int(2, "Invalid width or precision (overflow).\n", -1));
 	return (1);
 }

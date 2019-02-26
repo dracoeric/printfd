@@ -6,7 +6,7 @@
 #    By: erli <erli@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/22 12:53:22 by erli              #+#    #+#              #
-#    Updated: 2019/02/25 18:36:47 by erli             ###   ########.fr        #
+#    Updated: 2019/02/26 15:04:03 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,9 +18,10 @@ OBJSDIR			=		objs
 
 SRCS			=		main_printfd.c			pfd_add_char.c		pfd_add_str.c	\
 						pfd_unload_buf.c		pfd_manage_tag.c	pfd_read_tag.c	\
-						pfd_convert.c	\
+						pfd_convert.c			\
 																					\
-						pfd_num_type_size.c		pfd_num_to_str.c	\
+						pfd_num_type_size.c		pfd_num_to_str.c	pfd_arg_to_mem.c\
+						pfd_arg_to_bin.c		\
 						pfd_no_conv.c			pfd_conv_d.c		\
 						pfd_print_data.c											\
 						main.c
@@ -52,7 +53,6 @@ $(NAME)			:		$(OBJS) $(LIB) $(HEADER)
 						$(CC) $(CFLAGS) $(INCL) $(OBJS) $(ADDLIB) -o $(NAME)
 
 libft			:
-						@echo "Compiling: " $(GREEN) $(LIB) $(DEFAULT)
 						@make -C libft
 
 $(OBJSDIR)/%.o	:		$(SRCSDIR)/%.c $(HEADER)

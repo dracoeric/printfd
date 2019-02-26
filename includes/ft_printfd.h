@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:27:46 by erli              #+#    #+#             */
-/*   Updated: 2019/02/25 18:52:57 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/26 16:05:02 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 # include <stdlib.h>
 
 # define PRINT_B_SIZE 2043
+# define LONG_LONG_SIZE 8
+# define LL_LAST_BIT (8 * LONG_LONG_SIZE - 1)
 
-# define TAG_CHARS "#0 -+.123456789hzjltmdiuoxXcspf%eg"
+# define TAG_CHARS "#0 -+.*123456789hzjlLtmdiuoxXcspf%egMb"
 # define FORMAT_FLAGS "0# -+"
-# define MODIFIERS "hlLtmzj"
-# define CONVERSION "diouxXcspfeg%"
+# define MODIFIERS "hlLtmMbzj"
+# define CONVERSION "diuoxXfegcsp%"
 
 # define ZERO 1
 # define POUND (1 << 1)
@@ -36,23 +38,24 @@
 # define BL_MOD (1 << 9)
 # define T_MOD (1 << 10)
 # define M_MOD (1 << 11)
+# define MEM_MOD (1 << 12)
+# define B_MOD (1 << 13)
 
-# define D_CONV (1 << 13)
-# define I_CONV (1 << 14)
-# define O_CONV (1 << 15)
+# define D_CONV (1 << 14)
+# define I_CONV (1 << 15)
 # define U_CONV (1 << 16)
-# define X_CONV (1 << 17)
-# define BX_CONV (1 << 18)
+# define O_CONV (1 << 17)
+# define X_CONV (1 << 18)
+# define BX_CONV (1 << 19)
 
-# define C_CONV (1 << 19)
-# define S_CONV (1 << 20)
-# define P_CONV (1 << 21)
+# define F_CONV (1 << 20)
+# define E_CONV	(1 << 21)
+# define G_CONV (1 << 22)
 
-# define F_CONV (1 << 22)
-# define E_CONV	(1 << 23)
-# define G_CONV (1 << 24)
+# define C_CONV (1 << 23)
+# define S_CONV (1 << 24)
+# define P_CONV (1 << 25)
 
-# define PER_CONV (1 << 25)
 # define NO_CONV (1 << 26)
 
 typedef struct		s_pfd_tag
@@ -73,7 +76,7 @@ typedef struct		s_pfd_data
 	t_pfd_tag	*tag;
 }					t_pfd_data;
 
-typedef	int (*t_pfd_conv)(t_pfd_data *, va_list);
+typedef	int			(*t_pfd_conv)(t_pfd_data *, va_list);
 
 int					ft_printfd(int fd, char *format, ...);
 int					pfd_add_char(t_pfd_data *data, char c);
@@ -81,16 +84,18 @@ int					pfd_add_str(t_pfd_data *data, char *str);
 int					pfd_unload_buf(t_pfd_data *data);
 int					pfd_manage_tag(t_pfd_data *data, char *format,
 						va_list ap, size_t *i);
-int					pfd_read_tag(t_pfd_data *data, char *format, size_t *i);
+int					pfd_read_tag(t_pfd_data *data, char *format, size_t *i,
+						va_list ap);
 int					pfd_convert(t_pfd_data *data, va_list ap);
 
 size_t				pfd_num_type_size(int flags);
 int					pfd_num_to_str(t_pfd_data *data, unsigned long long nb);
+int					pfd_arg_to_mem(t_pfd_data *data, void *ptr);
+int					pfd_arg_to_bin(t_pfd_data *data, void *ptr);
 
 int					pfd_no_conv(t_pfd_data *data, va_list ap);
 int					pfd_conv_d(t_pfd_data *data, va_list ap);
 
 void				pfd_print_data(t_pfd_data *data);
-
 
 #endif

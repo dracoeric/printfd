@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:57:04 by erli              #+#    #+#             */
-/*   Updated: 2019/02/25 18:41:15 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/26 16:05:32 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ static	void	pfd_print_mod(t_pfd_tag *tag)
 	if (tag->flags & T_MOD)
 		ft_putstr("t ");
 	if (tag->flags & M_MOD)
-		ft_putstr("m\n");
+		ft_putstr("m ");
+	if (tag->flags & MEM_MOD)
+		ft_putstr("M ");
+	if (tag->flags & B_MOD)
+		ft_putstr("b\n");
 	else
 		ft_putchar('\n');
 }
@@ -57,8 +61,6 @@ static	void	pfd_print_conv2(t_pfd_tag *tag)
 		ft_putstr("e\n");
 	if (tag->flags & G_CONV)
 		ft_putstr("g\n");
-	if (tag->flags & PER_CONV)
-		ft_putstr("%\n");
 	if (tag->flags & NO_CONV)
 		ft_putstr("no converter\n");
 }
@@ -103,6 +105,8 @@ void			pfd_print_data(t_pfd_data *data)
 		pfd_print_mod(data->tag);
 		pfd_print_conv(data->tag);
 		ft_printf("width =       %d\n", data->tag->width);
-		ft_printf("precision =   %d\n\n", data->tag->precision);
+		ft_printf("precision =   %d\n", data->tag->precision);
+		ft_printf("nb_col =      %d\n", data->tag->nb_col);
+		ft_printf("nb_line =     %d\n\n", data->tag->nb_line);
 	}
 }

@@ -6,11 +6,13 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 13:52:47 by erli              #+#    #+#             */
-/*   Updated: 2019/02/25 18:52:17 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/26 13:09:01 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
+
+#include "libft.h" //remove
 
 static	int		pfd_conv_d_ptr(t_pfd_data *data, char *ptr)
 {
@@ -22,11 +24,14 @@ static	int		pfd_conv_d_ptr(t_pfd_data *data, char *ptr)
 	pfd_add_char(data, '{');
 	while (i < (size_t)data->tag->nb_col)
 	{
+		ft_printf("caca = %llu\n",*(unsigned long long *)(&(ptr[0])));
+		ft_printf("type_size = %lu\n", type_size);
 		if (pfd_num_to_str(data,
 			*(unsigned long long *)(&(ptr[i * type_size]))) < 0)
 			return (-1);
 		if (i + 1 < (size_t)data->tag->nb_col)
 			pfd_add_str(data, ", ");
+		i += 1;
 	}
 	pfd_add_char(data, '}');
 	return (1);
@@ -44,6 +49,7 @@ static	int		pfd_conv_d_mat(t_pfd_data *data, char **ptr)
 			return (-1);
 		if (i + 1 < (size_t)data->tag->nb_line)
 			pfd_add_str(data, ",\n");
+		i += 1;
 	}
 	pfd_add_char(data, '}');
 	return (1);

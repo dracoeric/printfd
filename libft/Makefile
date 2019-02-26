@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2019/02/25 10:29:52 by erli             ###   ########.fr        #
+#    Updated: 2019/02/26 13:23:51 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -82,10 +82,14 @@ HEADER		=		includes/libft.h 			\
 
 RM			=		rm -f
 
+GREEN			=		"\x1B[32m"
+
+DEFAULT			=		"\x1B[0m"
 
 all			:		$(NAME)
 
 $(NAME)		:		$(OBJS) $(HEADER)
+					@echo "Compiling: " $(GREEN) $(NAME) $(DEFAULT)
 					@ar -rucs $(NAME) $(OBJS)
 
 $(OBJSDIR)/%.o			:		$(SRCSDIR)/%.c
