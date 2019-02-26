@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 18:32:21 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 17:16:38 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/26 17:57:37 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static	size_t	pfd_num_len(t_pfd_data *data, unsigned long long nb)
 	if (data->tag->flags & X_CONV || data->tag->flags & BX_CONV)
 		base = 16;
 	len = 1;
-	while (nb / base >= base)
+	while (nb >= base)
 	{
 		nb /= base;
 		len++;
@@ -95,9 +95,9 @@ int				pfd_num_to_str(t_pfd_data *data, unsigned long long nb)
 		return (pfd_arg_to_mem(data, &nb));
 	if (data->tag->flags & B_MOD)
 		return (pfd_arg_to_bin(data, &nb));
-	if (nb == 0 && data->tag->precision == 0)
-		return (1);
 	sign = pfd_extract_sign(data->tag->flags, &nb);
+	if (nb == 0 && data->tag->precision == 0)
+		return (pfd_add_width(data, &sign, (sign == '\0' ? 0 : 1)));
 	len = pfd_num_len(data, nb);
 	total_len = pfd_num_total_len(data, nb, len, sign);
 	return (pfd_write_num_to_str(data, nb, sign, (size_t)total_len));

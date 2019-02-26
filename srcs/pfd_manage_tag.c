@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:06:23 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 16:49:26 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/26 17:31:55 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int				pfd_manage_tag(t_pfd_data *data, char *format, va_list ap,
 	if (data->tag->flags & T_MOD || data->tag->flags & M_MOD)
 		pfd_get_row_col(data, ap);
 	pfd_harmonize_flags(data->tag);
-	pfd_print_data(data);
 	if (pfd_convert(data, ap) < 0)
 		return (-1);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 16:30:07 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 16:58:52 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/26 17:57:25 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ static	int		pfd_write_num(t_pfd_data *data, char *str,
 	if (data->tag->flags & X_CONV || data->tag->flags & BX_CONV)
 		base = 16;
 	i = 0;
+	if (nb == 0)
+		str[total_len - i - 1] = str_base[(nb % base)];
 	while (nb != 0)
 	{
-		str[total_len - i] = str_base[(nb % base)];
+		str[total_len - i - 1] = str_base[(nb % base)];
 		i += 1;
 		nb = nb / base;
 	}
@@ -51,7 +53,7 @@ int				pfd_write_num_to_str(t_pfd_data *data,
 	i = pfd_write_num(data, str, nb, total_len);
 	while (i < data->tag->precision)
 	{
-		str[total_len - i] = '0';
+		str[total_len - i - 1] = '0';
 		i++;
 	}
 	if (nb != 0 && data->tag->flags & POUND && data->tag->flags & (7 << 17))
