@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:27:46 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 16:05:02 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/26 17:16:55 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # define PRINT_B_SIZE 2043
 # define LONG_LONG_SIZE 8
 # define LL_LAST_BIT (8 * LONG_LONG_SIZE - 1)
+
+# define HEXA_CAP "0123456789ABCDEF"
+# define HEXA_LOW "0123456789abcdef"
+# define DECIMALS "0123456789"
 
 # define TAG_CHARS "#0 -+.*123456789hzjlLtmdiuoxXcspf%egMb"
 # define FORMAT_FLAGS "0# -+"
@@ -80,7 +84,7 @@ typedef	int			(*t_pfd_conv)(t_pfd_data *, va_list);
 
 int					ft_printfd(int fd, char *format, ...);
 int					pfd_add_char(t_pfd_data *data, char c);
-int					pfd_add_str(t_pfd_data *data, char *str);
+int					pfd_add_str(t_pfd_data *data, char *str, size_t len);
 int					pfd_unload_buf(t_pfd_data *data);
 int					pfd_manage_tag(t_pfd_data *data, char *format,
 						va_list ap, size_t *i);
@@ -90,8 +94,12 @@ int					pfd_convert(t_pfd_data *data, va_list ap);
 
 size_t				pfd_num_type_size(int flags);
 int					pfd_num_to_str(t_pfd_data *data, unsigned long long nb);
+int					pfd_write_num_to_str(t_pfd_data *data,
+						unsigned long long nb, char sign, int total_len);
 int					pfd_arg_to_mem(t_pfd_data *data, void *ptr);
 int					pfd_arg_to_bin(t_pfd_data *data, void *ptr);
+
+int					pfd_add_width(t_pfd_data *data, char *str, size_t len);
 
 int					pfd_no_conv(t_pfd_data *data, va_list ap);
 int					pfd_conv_d(t_pfd_data *data, va_list ap);

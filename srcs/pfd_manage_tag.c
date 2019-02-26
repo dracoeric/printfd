@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:06:23 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 16:06:05 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/26 16:49:26 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static	void	pfd_harmonize_flags(t_pfd_tag *tag)
 	if (tag->flags & (7 << 23))
 		tag->flags = (tag->flags & (-1 - ZERO));
 	if (tag->flags & (7 << 23) || tag->flags & (15 << 16)
-		|| tag->flags & NO_CONV) 
+		|| tag->flags & NO_CONV)
 		tag->flags = (tag->flags & (-1 - (3 << 3)));
 }
 
