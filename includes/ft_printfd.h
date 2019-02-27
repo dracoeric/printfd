@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:27:46 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 17:16:55 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/27 09:15:54 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <stdarg.h>
 # include <stdlib.h>
+
+#include "libft.h"
 
 # define PRINT_B_SIZE 2043
 # define LONG_LONG_SIZE 8
@@ -102,7 +104,8 @@ int					pfd_arg_to_bin(t_pfd_data *data, void *ptr);
 int					pfd_add_width(t_pfd_data *data, char *str, size_t len);
 
 int					pfd_no_conv(t_pfd_data *data, va_list ap);
-int					pfd_conv_d(t_pfd_data *data, va_list ap);
+int					pfd_conv_signed_decimals(t_pfd_data *data, va_list ap);
+int					pfd_conv_unsigned_decimals(t_pfd_data *data, va_list ap);
 
 void				pfd_print_data(t_pfd_data *data);
 

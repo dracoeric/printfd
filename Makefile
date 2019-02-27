@@ -6,7 +6,7 @@
 #    By: erli <erli@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/22 12:53:22 by erli              #+#    #+#              #
-#    Updated: 2019/02/26 16:53:20 by erli             ###   ########.fr        #
+#    Updated: 2019/02/27 09:10:27 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,7 +23,8 @@ SRCS			=		main_printfd.c			pfd_add_char.c		pfd_add_str.c	\
 						pfd_num_type_size.c		pfd_num_to_str.c	pfd_arg_to_mem.c\
 						pfd_arg_to_bin.c		pfd_write_num_to_str.c				\
 						pfd_add_width.c			\
-						pfd_no_conv.c			pfd_conv_d.c		\
+						pfd_no_conv.c			\
+						pfd_conv_unsigned_decimals.c	pfd_conv_signed_decimals.c	\
 						pfd_print_data.c											\
 						main.c
 

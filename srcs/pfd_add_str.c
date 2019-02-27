@@ -6,12 +6,11 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 18:18:32 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 17:04:39 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/27 09:27:57 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
-#include "libft.h"
 
 int		pfd_add_str(t_pfd_data *data, char *str, size_t len)
 {

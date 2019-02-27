@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 16:30:07 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 17:57:25 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/27 09:57:42 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static	int		pfd_write_num(t_pfd_data *data, char *str,
 	int					i;
 
 	base = 10;
-	str_base = (data->tag->flags & X_CONV ? HEXA_LOW : HEXA_CAP);
-	str_base = (data->tag->flags & BX_CONV ? str_base : DECIMALS);
+	str_base = (data->tag->flags & BX_CONV ? HEXA_CAP : DECIMALS);
+	str_base = (data->tag->flags & X_CONV ? HEXA_LOW : str_base);
 	if (data->tag->flags & O_CONV)
 		base = 8;
 	if (data->tag->flags & X_CONV || data->tag->flags & BX_CONV)

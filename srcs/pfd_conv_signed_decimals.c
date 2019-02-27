@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 13:52:47 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 17:17:58 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/27 09:11:37 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static	int		pfd_conv_d_mat(t_pfd_data *data, char **ptr)
 	return (1);
 }
 
-int				pfd_conv_d(t_pfd_data *data, va_list ap)
+int				pfd_conv_signed_decimals(t_pfd_data *data, va_list ap)
 {
 	long long	nb;
 
