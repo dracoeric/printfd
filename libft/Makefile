@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2019/02/26 13:23:51 by erli             ###   ########.fr        #
+#    Updated: 2019/02/27 15:26:21 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,8 @@ SRCSDIR		=		srcs
 
 OBJSDIR		=		objs
 
-SRCS		=		ft_atoi.c			ft_char_at_pos.c	ft_itoa.c			\
+SRCS		=		ft_double_exponent.c										\
+					ft_atoi.c			ft_char_at_pos.c	ft_itoa.c			\
 					ft_char_in_str.c	ft_free_mat_int.c	get_next_line.c		\
 					ft_tolower.c		ft_toupper.c		ft_free_mat_char.c	\
 					ft_isalpha.c		ft_isdigit.c		ft_isalnum.c		\
@@ -90,11 +91,11 @@ all			:		$(NAME)
 
 $(NAME)		:		$(OBJS) $(HEADER)
 					@echo "Compiling: " $(GREEN) $(NAME) $(DEFAULT)
-					@ar -rucs $(NAME) $(OBJS)
+					ar -rucs $(NAME) $(OBJS)
 
 $(OBJSDIR)/%.o			:		$(SRCSDIR)/%.c
 					@mkdir -p $(OBJSDIR)
-					@$(CC) $(CFLAG) $(INCL) -c $< -o $@
+					$(CC) $(CFLAG) $(INCL) -c $< -o $@
 
 val			:		$(OBJS) $(HEADER)
 					$(CC) -g $(CFLAG) $(INCL) -o test $(OBJS) main.c -L.  -lft

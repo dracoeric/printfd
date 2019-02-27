@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:27:46 by erli              #+#    #+#             */
-/*   Updated: 2019/02/27 09:15:54 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/27 13:50:12 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # define PRINT_B_SIZE 2043
 # define LONG_LONG_SIZE 8
 # define LL_LAST_BIT (8 * LONG_LONG_SIZE - 1)
+# define LD_SIZE 10
+# define D_SIZE 8
+# define LD_NB_EXP_BIT 15
+# define D_NB_EXP_BIT 11
 
 # define HEXA_CAP "0123456789ABCDEF"
 # define HEXA_LOW "0123456789abcdef"
@@ -98,6 +102,7 @@ size_t				pfd_num_type_size(int flags);
 int					pfd_num_to_str(t_pfd_data *data, unsigned long long nb);
 int					pfd_write_num_to_str(t_pfd_data *data,
 						unsigned long long nb, char sign, int total_len);
+int					pfd_double_to_str(t_pfd_data *data, long double nb);
 int					pfd_arg_to_mem(t_pfd_data *data, void *ptr);
 int					pfd_arg_to_bin(t_pfd_data *data, void *ptr);
 
@@ -106,7 +111,7 @@ int					pfd_add_width(t_pfd_data *data, char *str, size_t len);
 int					pfd_no_conv(t_pfd_data *data, va_list ap);
 int					pfd_conv_signed_decimals(t_pfd_data *data, va_list ap);
 int					pfd_conv_unsigned_decimals(t_pfd_data *data, va_list ap);
+int					pfd_conv_doubles(t_pfd_data *data, va_list ap);
 
 void				pfd_print_data(t_pfd_data *data);
-
 #endif

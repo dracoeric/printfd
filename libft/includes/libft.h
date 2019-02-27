@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2019/01/21 13:27:21 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/27 15:24:52 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ typedef struct	s_conv
 	char		symbol;
 	t_converter converter;
 }				t_conv;
+
+unsigned int	ft_double_exponent(long double nb, size_t double_size,
+					size_t exp_nb_bit);
 
 int				ft_atoi(const char *str);
 void			ft_free_mat_int(int **mat, int i);

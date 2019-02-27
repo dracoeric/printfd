@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:57:04 by erli              #+#    #+#             */
-/*   Updated: 2019/02/26 16:05:32 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/27 11:59:41 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static	void	pfd_print_mod(t_pfd_tag *tag)
 		ft_putstr("l ");
 	if (tag->flags & LL_MOD)
 		ft_putstr("ll ");
+	if (tag->flags & BL_MOD)
+		ft_putstr("L ");
 	if (tag->flags & T_MOD)
 		ft_putstr("t ");
 	if (tag->flags & M_MOD)
