@@ -6,11 +6,12 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 11:24:58 by erli              #+#    #+#             */
-/*   Updated: 2019/02/27 14:33:28 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/27 16:05:53 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
+#include "libft.h"
 
 /*
 ** Retrieves the whole part and the float_part.
@@ -19,10 +20,16 @@
 static	void		pfd_get_whole_part(long double nb, long double *whole_part,
 						long double *prec_part)
 {
-	int	exponent;
+	int				exponent;
+	int				bias;
 
-	exponent = ((*((unsigned char *)(&nb) + LD_SIZE - 1)) & 127) << 8;
-	exponent |= (*((unsigned char *)(&nb) + LD_SIZE - 2));
+	exponent = ft_double_exponent(nb, LD_SIZE, LD_NB_EXP_BIT);
+	bias = (1 << LD_NB_EXP_BIT) - 1;
+	*whole_part = 0;
+	*whole_part = exponent << (LD_SIZE * 8 - LD_NB_EXP_BIT - 1);
+	*whole_part |= (long double)1 << (LD_SIZE * 8 - 1);
+	if (exponent == bias)
+		*whole_part |= 
 
 }
 

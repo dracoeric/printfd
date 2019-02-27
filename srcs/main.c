@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:21:45 by erli              #+#    #+#             */
-/*   Updated: 2019/02/27 15:23:13 by erli             ###   ########.fr       */
+/*   Updated: 2019/02/27 17:28:15 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		pfd_print_doubles(long double nb)
 	ft_putchar('\n');
 }
 
-void		pfd_print_int(int nb)
+void		pfd_print_int(unsigned long long nb)
 {
 	unsigned char	*ptr;
 	int 			i;
@@ -51,7 +51,7 @@ void		pfd_print_int(int nb)
 	int				nb_bytes;
 
 	ptr = (unsigned char *)(&nb);
-	nb_bytes = 4;
+	nb_bytes = 8;
 	i = 0;
 	while (i < nb_bytes)
 	{
@@ -67,7 +67,45 @@ void		pfd_print_int(int nb)
 			ft_putchar('\n');
 		i++;
 	}
-	ft_putchar('\n');
+}
+
+static	void		pfd_get_whole_part(long double nb, unsigned long long *whole_part,
+						unsigned long long *prec_part)
+{
+	int				exponent;
+	int		 		i;
+	int				j;
+	int				nb_bits;
+	unsigned char 	*ptrbase;
+	unsigned long long	mantisse;
+
+	ptrbase = (unsigned char *)(&nb);
+	i = (8 * LD_SIZE) - 1 - LD_NB_EXP_BIT;
+	if (i % 8 == 0)
+		i = i / 8 - 1;
+	else
+		i = i / 8;
+	j = 0;
+	mantisse = 0;
+	nb_bits = 0;
+	while (j <= i)
+	{
+		nb_bits += 8;
+		if (mantisse != 0)
+			mantisse = mantisse << 8;
+		mantisse |= ptrbase[i - j];
+		j++;
+	}
+	exponent = ft_double_exponent(nb, LD_SIZE, LD_NB_EXP_BIT);
+	exponent -= (1 << (LD_NB_EXP_BIT - 1)) - 1;
+	nb_bits -= (7 - exponent % 8);
+	*whole_part = mantisse >> (7 - (exponent % 8));
+	*whole_part = *whole_part >> (nb_bits - exponent - 1);
+	*prec_part = mantisse;
+	pfd_print_int(*whole_part);
+	ft_printf("expo = %d, whole = %llu\n\n", exponent, *whole_part);
+	pfd_print_int(*prec_part);
+	ft_printf("expo = %d, prec = %llu\n\n", exponent, *prec_part);
 }
 
 int		main(void)
@@ -78,8 +116,10 @@ int		main(void)
 	char		*str;
 	long double	nb;
 	int			exponent;
+	unsigned long long	whole;
+	unsigned long long	float_;
 
-	nb = 91286738.98172456;
+	nb = 2898127373.1198237;
 	ft_printf("sizeof (long double) = %lu\n", sizeof(double));
 	str = "%0-20.0+Lf\n";
 	mat = malloc(8);
@@ -90,10 +130,9 @@ int		main(void)
 	if (ret != ret1)
 		ft_printf("difference: ret = %d, retfd = %d\n", ret, ret1);
 	ft_printf("\n\n TEST\n");
-	pfd_print_doubles(1);
 	pfd_print_doubles(nb);
 	exponent = ft_double_exponent(nb, LD_SIZE, LD_NB_EXP_BIT);
-	pfd_print_int(exponent);
-	
+	pfd_get_whole_part(nb, &whole, &float_);
+	pfd_print_int((unsigned long long)nb);
 	return (0);
 }
