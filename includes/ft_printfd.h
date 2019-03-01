@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:27:46 by erli              #+#    #+#             */
-/*   Updated: 2019/03/01 18:47:27 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/01 18:48:31 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <stdarg.h>
 # include <stdlib.h>
-
-#include "libft.h"
 
 # define PRINT_B_SIZE 2043
 # define LONG_LONG_SIZE 8

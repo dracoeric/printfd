@@ -6,11 +6,12 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:28:02 by erli              #+#    #+#             */
-/*   Updated: 2019/03/01 18:33:16 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/01 18:48:51 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
+#include "libft.h"
 
 int			pfd_conv_string(t_pfd_data *data, va_list ap)
 {
