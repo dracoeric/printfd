@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pfd_conv_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 14:21:45 by erli              #+#    #+#             */
-/*   Updated: 2019/03/01 18:44:06 by erli             ###   ########.fr       */
+/*   Created: 2019/03/01 18:21:48 by erli              #+#    #+#             */
+/*   Updated: 2019/03/01 18:26:32 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
-#include <stdio.h>
-#include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <math.h>
 
-int			main(void)
+int			pfd_conv_char(t_pfd_data *data, va_list ap)
 {
-	int					ret;
-	int					ret1;
-	char				*str;
-	char				*c;
+	unsigned char c;
 
-	c = 0;
-	str = "%#+ 10p\n";
-	ret = printf(str, c);
-	ret1 = ft_printfd(1, str, c);
-	if (ret != ret1)
-		ft_printf("difference: ret = %d, retfd = %d\n", ret, ret1);
-	return (0);
+	c = (unsigned char)va_arg(ap, int);
+	return (pfd_add_width(data, (char *)&c, 1));
 }

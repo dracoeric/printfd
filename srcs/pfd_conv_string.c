@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pfd_conv_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 14:21:45 by erli              #+#    #+#             */
-/*   Updated: 2019/03/01 18:44:06 by erli             ###   ########.fr       */
+/*   Created: 2019/03/01 18:28:02 by erli              #+#    #+#             */
+/*   Updated: 2019/03/01 18:33:16 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
-#include <stdio.h>
-#include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <math.h>
 
-int			main(void)
+int			pfd_conv_string(t_pfd_data *data, va_list ap)
 {
-	int					ret;
-	int					ret1;
-	char				*str;
-	char				*c;
+	char	*str;
+	size_t	len;
 
-	c = 0;
-	str = "%#+ 10p\n";
-	ret = printf(str, c);
-	ret1 = ft_printfd(1, str, c);
-	if (ret != ret1)
-		ft_printf("difference: ret = %d, retfd = %d\n", ret, ret1);
-	return (0);
+	str = va_arg(ap, char *);
+	if (str == NULL && data->tag->precision != 0)
+		return (pfd_add_width(data, "(null)", 6));
+	len = (data->tag->precision == -1 ? ft_strlen(str) : data->tag->precision);
+	return (pfd_add_width(data, str, len));
 }

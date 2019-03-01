@@ -6,7 +6,7 @@
 #    By: erli <erli@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/22 12:53:22 by erli              #+#    #+#              #
-#    Updated: 2019/03/01 17:22:36 by erli             ###   ########.fr        #
+#    Updated: 2019/03/01 18:47:34 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -25,10 +25,11 @@ SRCS			=		main_printfd.c			pfd_add_char.c		pfd_add_str.c	\
 						pfd_double_to_str.c		pfd_write_double_to_str.c			\
 						pfd_write_whole_part_slide.c	pfd_remove_trailing_zeros.c	\
 						pfd_write_whole_part.c	pfd_add_width.c		\
-						pfd_no_conv.c			\
+						pfd_conv_string.c		pfd_conv_char.c		pfd_no_conv.c	\
+						pfd_conv_ptr.c			\
 						pfd_conv_unsigned_decimals.c	pfd_conv_signed_decimals.c	\
 						pfd_print_data.c		\
-						main.c
+						main.c	
 
 OBJS			=		$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
 

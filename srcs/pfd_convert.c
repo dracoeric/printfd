@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 18:40:33 by erli              #+#    #+#             */
-/*   Updated: 2019/03/01 11:35:00 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/01 18:43:09 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static	t_pfd_conv	pfd_get_converter(int flags)
 		return (&pfd_conv_unsigned_decimals);
 	if (flags & (7 << 20))
 		return (&pfd_conv_doubles);
+	if (flags & C_CONV)
+		return (&pfd_conv_char);
+	if (flags & S_CONV)
+		return (&pfd_conv_string);
+	if (flags & P_CONV)
+		return (&pfd_conv_ptr);
 	return (&pfd_no_conv);
 }
 

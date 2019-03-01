@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:27:46 by erli              #+#    #+#             */
-/*   Updated: 2019/03/01 17:22:17 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/01 18:47:27 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,9 @@ int					pfd_arg_to_bin(t_pfd_data *data, void *ptr);
 int					pfd_add_width(t_pfd_data *data, char *str, size_t len);
 
 int					pfd_no_conv(t_pfd_data *data, va_list ap);
+int					pfd_conv_char(t_pfd_data *data, va_list ap);
+int					pfd_conv_string(t_pfd_data *data, va_list ap);
+int					pfd_conv_ptr(t_pfd_data *data, va_list ap);
 int					pfd_conv_signed_decimals(t_pfd_data *data, va_list ap);
 int					pfd_conv_unsigned_decimals(t_pfd_data *data, va_list ap);
 int					pfd_conv_doubles(t_pfd_data *data, va_list ap);
