@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pfd_write_whole_part_silde.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 14:21:45 by erli              #+#    #+#             */
-/*   Updated: 2019/03/01 17:58:14 by erli             ###   ########.fr       */
+/*   Created: 2019/03/01 16:47:42 by erli              #+#    #+#             */
+/*   Updated: 2019/03/01 17:44:59 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
-#include <stdio.h>
 #include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
 
-int			main(void)
+/*
+** Print whole part. manage round up il E-conv and whole == 10.
+*/
+
+int				pfd_write_whole_part(t_pfd_data *data, char *str,
+					unsigned long long whole, size_t i)
 {
-	int					ret;
-	int					ret1;
-	char				*str;
-	long double			nb;
-
-	nb = -18400000000.2;
-	str = "%0-+10.10Lg\n";
-	ret = printf(str, nb);
-	ret1 = ft_printfd(1, str, nb);
-	if (ret != ret1)
-		ft_printf("difference: ret = %d, retfd = %d\n", ret, ret1);
-	return (0);
+	if (whole == 0)
+		str[i] = '0';
+	while (whole != 0)
+	{
+		str[i--] = whole % 10 + '0';
+		whole /= 10;
+	}
+	return (pfd_remove_trailing_zeros(data, str, ft_strlen(str)));
 }

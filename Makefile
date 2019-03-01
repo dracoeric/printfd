@@ -6,7 +6,7 @@
 #    By: erli <erli@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/22 12:53:22 by erli              #+#    #+#              #
-#    Updated: 2019/02/27 13:30:49 by erli             ###   ########.fr        #
+#    Updated: 2019/03/01 17:22:36 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,11 +18,13 @@ OBJSDIR			=		objs
 
 SRCS			=		main_printfd.c			pfd_add_char.c		pfd_add_str.c	\
 						pfd_unload_buf.c		pfd_manage_tag.c	pfd_read_tag.c	\
-						pfd_convert.c			\
+						pfd_convert.c			pfd_conv_doubles.c	\
 																					\
 						pfd_num_type_size.c		pfd_num_to_str.c	pfd_arg_to_mem.c\
 						pfd_arg_to_bin.c		pfd_write_num_to_str.c				\
-						pfd_add_width.c			\
+						pfd_double_to_str.c		pfd_write_double_to_str.c			\
+						pfd_write_whole_part_slide.c	pfd_remove_trailing_zeros.c	\
+						pfd_write_whole_part.c	pfd_add_width.c		\
 						pfd_no_conv.c			\
 						pfd_conv_unsigned_decimals.c	pfd_conv_signed_decimals.c	\
 						pfd_print_data.c		\

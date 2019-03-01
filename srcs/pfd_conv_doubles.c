@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 13:52:47 by erli              #+#    #+#             */
-/*   Updated: 2019/02/27 11:49:49 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/01 17:47:45 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int				pfd_conv_doubles(t_pfd_data *data, va_list ap)
 {
 	long double	nb;
 
+	data->tag->precision = (data->tag->precision == -1 ? 6
+		: data->tag->precision);
 	if (data->tag->flags & T_MOD)
 		return (pfd_conv_double_ptr(data, va_arg(ap, char *)));
 	else if (data->tag->flags & M_MOD)

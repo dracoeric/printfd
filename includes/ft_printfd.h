@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:27:46 by erli              #+#    #+#             */
-/*   Updated: 2019/02/27 13:50:12 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/01 17:22:17 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@
 # define LONG_LONG_SIZE 8
 # define LL_LAST_BIT (8 * LONG_LONG_SIZE - 1)
 # define LD_SIZE 10
-# define D_SIZE 8
 # define LD_NB_EXP_BIT 15
-# define D_NB_EXP_BIT 11
+# define LD_BIAS ((1 << (LD_NB_EXP_BIT - 1)) - 1)
 
 # define HEXA_CAP "0123456789ABCDEF"
 # define HEXA_LOW "0123456789abcdef"
 # define DECIMALS "0123456789"
+
+# define DECIMAL_POINT '.'
 
 # define TAG_CHARS "#0 -+.*123456789hzjlLtmdiuoxXcspf%egMb"
 # define FORMAT_FLAGS "0# -+"
@@ -103,6 +104,14 @@ int					pfd_num_to_str(t_pfd_data *data, unsigned long long nb);
 int					pfd_write_num_to_str(t_pfd_data *data,
 						unsigned long long nb, char sign, int total_len);
 int					pfd_double_to_str(t_pfd_data *data, long double nb);
+int					pfd_write_double_to_str(t_pfd_data *data, long double nb,
+						int exp, size_t len);
+int					pfd_write_whole_part_slide(t_pfd_data *data, char *str,
+						unsigned long long whole, size_t i);
+int					pfd_write_whole_part(t_pfd_data *data, char *str,
+						unsigned long long whole, size_t i);
+int					pfd_remove_trailing_zeros(t_pfd_data *data, char *str,
+						size_t len);
 int					pfd_arg_to_mem(t_pfd_data *data, void *ptr);
 int					pfd_arg_to_bin(t_pfd_data *data, void *ptr);
 
