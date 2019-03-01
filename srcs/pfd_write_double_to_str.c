@@ -6,12 +6,13 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 10:52:22 by erli              #+#    #+#             */
-/*   Updated: 2019/03/01 17:49:18 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/01 18:17:05 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
 #include "libft.h"
+#include <math.h>
 
 /*
 ** Extract the sign and transform nb to (abs)nb.
@@ -97,6 +98,22 @@ static	int		pfd_write_float_part(t_pfd_tag *tag, char *str,
 	return (ret);
 }
 
+static	int		pfd_double_infinity(t_pfd_data *data, long double nb)
+{
+	char	str[5];
+	size_t	i;
+	size_t	len;
+
+	i = 0;
+	len = 3;
+	ft_bzero(str, 5);
+	pfd_double_extract_sign(data->tag->flags, &nb, str, &i);
+	if (str[0] != '\0')
+		len++;
+	ft_strcpy(str + i, "inf");
+	return (pfd_add_width(data, str, len));
+}
+
 int				pfd_write_double_to_str(t_pfd_data *data, long double nb,
 					int exp, size_t len)
 {
@@ -107,8 +124,10 @@ int				pfd_write_double_to_str(t_pfd_data *data, long double nb,
 
 	i = 0;
 	ft_bzero(str, len + 2);
-	pfd_write_exponent(data->tag, str, exp, len);
+	if (nb == INFINITY || nb == -INFINITY)
+		return (pfd_double_infinity(data, nb));
 	pfd_double_extract_sign(data->tag->flags, &nb, str, &i);
+	pfd_write_exponent(data->tag, str, exp, len);
 	whole = ft_double_whole(nb, LD_SIZE, LD_NB_EXP_BIT);
 	while (whole >= 10)
 	{

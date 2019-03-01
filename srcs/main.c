@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:21:45 by erli              #+#    #+#             */
-/*   Updated: 2019/03/01 17:58:14 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/01 18:17:38 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 #include "libft.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <math.h>
 
 int			main(void)
 {
 	int					ret;
 	int					ret1;
 	char				*str;
-	long double			nb;
+	double			nb;
 
-	nb = -18400000000.2;
-	str = "%0-+10.10Lg\n";
+	nb = INFINITY;
+	str = "%- 10.0f\n";
 	ret = printf(str, nb);
 	ret1 = ft_printfd(1, str, nb);
 	if (ret != ret1)
