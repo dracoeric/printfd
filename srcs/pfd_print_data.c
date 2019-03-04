@@ -6,12 +6,13 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:57:04 by erli              #+#    #+#             */
-/*   Updated: 2019/02/27 11:59:41 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 15:35:43 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
 #include "libft.h"
+#include <stdio.h>
 
 static	void	pfd_print_format(t_pfd_tag *tag)
 {
@@ -93,11 +94,11 @@ static	void	pfd_print_conv(t_pfd_tag *tag)
 
 void			pfd_print_data(t_pfd_data *data)
 {
-	ft_printf("\n==== Printing data ====\nfd =           %d\n", data->fd);
-	ft_printf("buf =         '%s'\n", data->buf);
-	ft_printf("cursor =      %d\n", data->cursor);
-	ft_printf("pointing at:  '%c'\n", data->buf[data->cursor]);
-	ft_printf("ret =         %d\n", data->ret);
+	printf("\n==== Printing data ====\nfd =           %d\n", data->fd);
+	printf("buf =         '%s'\n", data->buf);
+	printf("cursor =      %zu\n", data->cursor);
+	printf("pointing at:  '%c'\n", data->buf[data->cursor]);
+	printf("ret =         %zu\n", data->ret);
 	if (data->tag == 0)
 		ft_putstr("no tag\n\n");
 	else
@@ -106,9 +107,9 @@ void			pfd_print_data(t_pfd_data *data)
 		pfd_print_format(data->tag);
 		pfd_print_mod(data->tag);
 		pfd_print_conv(data->tag);
-		ft_printf("width =       %d\n", data->tag->width);
-		ft_printf("precision =   %d\n", data->tag->precision);
-		ft_printf("nb_col =      %d\n", data->tag->nb_col);
-		ft_printf("nb_line =     %d\n\n", data->tag->nb_line);
+		printf("width =       %d\n", data->tag->width);
+		printf("precision =   %d\n", data->tag->precision);
+		printf("nb_col =      %d\n", data->tag->nb_col);
+		printf("nb_line =     %d\n\n", data->tag->nb_line);
 	}
 }
