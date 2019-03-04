@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:27:46 by erli              #+#    #+#             */
-/*   Updated: 2019/03/03 11:00:02 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 10:11:31 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@
 
 # define DECIMAL_POINT '.'
 
-# define TAG_CHARS "#0 -+.*123456789hzjlLtmdiuoxXcspf%egMb"
+# define TAG_CHARS "#0 -+.*123456789hzjlLtmdiuoxXcspfegMb"
 # define FORMAT_FLAGS "0# -+"
 # define MODIFIERS "hlLtmMbzj"
-# define CONVERSION "diuoxXfegcsp%"
+# define CONVERSION "diuoxXfegcsp"
 
 # define ZERO 1
 # define POUND (1 << 1)
@@ -82,6 +82,7 @@ typedef struct		s_pfd_data
 	char		buf[PRINT_B_SIZE + 1];
 	size_t		cursor;
 	size_t		ret;
+	char		take_char;
 	t_pfd_tag	*tag;
 }					t_pfd_data;
 
