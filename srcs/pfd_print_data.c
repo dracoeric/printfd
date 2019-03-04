@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:57:04 by erli              #+#    #+#             */
-/*   Updated: 2019/02/27 11:59:41 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 10:23:52 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void			pfd_print_data(t_pfd_data *data)
 	ft_printf("cursor =      %d\n", data->cursor);
 	ft_printf("pointing at:  '%c'\n", data->buf[data->cursor]);
 	ft_printf("ret =         %d\n", data->ret);
+	ft_printf("no_conv =     %d\n", data->no_conv);
 	if (data->tag == 0)
 		ft_putstr("no tag\n\n");
 	else

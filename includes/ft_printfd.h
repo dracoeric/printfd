@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:27:46 by erli              #+#    #+#             */
-/*   Updated: 2019/03/04 10:11:31 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 10:18:54 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct		s_pfd_data
 	char		buf[PRINT_B_SIZE + 1];
 	size_t		cursor;
 	size_t		ret;
-	char		take_char;
+	char		no_conv;
 	t_pfd_tag	*tag;
 }					t_pfd_data;
 

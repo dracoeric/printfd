@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:22:53 by erli              #+#    #+#             */
-/*   Updated: 2019/03/04 10:09:42 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 10:21:06 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,8 @@ int			ft_printf(const char *format, ...)
 	ret = 1;
 	while (format[i] != '\0' && ret > 0)
 	{
-		while ((data->take_char || format[i] != '%') && format[i] != '\0'
-			&& ret > 0)
-		{
+		while (format[i] != '%' && format[i] != '\0' && ret > 0)
 			ret = pfd_add_char(data, format[i++]);
-			data->take_char = 0;
-		}
 		if (ret > 0 && format[i] == '%')
 			ret = pfd_manage_tag(data, (char *)format, ap, &i);
 	}
