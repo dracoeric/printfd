@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 18:35:16 by erli              #+#    #+#             */
-/*   Updated: 2019/03/04 10:53:47 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 13:34:10 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,10 +136,8 @@ int				pfd_read_tag(t_pfd_data *data, char *format, size_t *i,
 	if (data->tag->flags >> 14 == 0)
 	{
 		data->tag->flags = (data->tag->flags | NO_CONV);
-		data->no_conv = format[*i];
-		*i += 1;
+		data->no_conv = (format[*i] == '\0' ? '\0' : format[*i]);
+		*i += (format[*i] == '\0' ? 0 : 1);
 	}
-	if (data->tag->width < 0 || data->tag->precision < -1)
-		return (ft_msg_int(2, "Invalid width or precision (overflow).\n", -1));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 18:32:21 by erli              #+#    #+#             */
-/*   Updated: 2019/03/04 11:31:57 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 13:22:19 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ static	size_t	pfd_num_total_len(t_pfd_data *data, unsigned long long nb,
 
 	total_len = (len > data->tag->precision ? len : data->tag->precision);
 	total_len += (sign == '\0' ? 0 : 1);
-	if (nb != 0 && data->tag->flags & O_CONV && data->tag->flags & POUND)
-			total_len += 1;
-	else if (nb != 0 && data->tag->flags & (7 << 17)
+	if (nb != 0 && data->tag->flags & O_CONV && data->tag->flags & POUND
+		&& !(data->tag->precision > len))
+		total_len += 1;
+	else if (nb != 0 && data->tag->flags & (3 << 18)
 		&& data->tag->flags & POUND)
 		total_len += 2;
 	return (total_len);

@@ -6,13 +6,13 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 16:52:16 by erli              #+#    #+#             */
-/*   Updated: 2019/03/04 11:42:37 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 13:37:40 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
 
-static	int	pfd_manage_pound_ox_sign(t_pfd_data *data, char **str, size_t *len)
+static	int	pfd_manage_pound_ox(t_pfd_data *data, char **str, size_t *len)
 {
 	size_t nb_char;
 
@@ -27,15 +27,14 @@ static	int	pfd_manage_pound_ox_sign(t_pfd_data *data, char **str, size_t *len)
 		*len -= nb_char;
 		data->tag->width -= nb_char;
 	}
-	else if (((*str)[0] == '-' || (*str)[0] == '+')
-		&& data->tag->flags & ZERO)
+	else if (*str != 0 && ((*str)[0] == '-' || (*str)[0] == '+'
+		|| (*str)[0] == ' ') && data->tag->flags & ZERO)
 	{
-		nb_char = 1;
-		if (pfd_add_str(data, *str, nb_char) < 0)
+		if (pfd_add_str(data, *str, 1) < 0)
 			return (-1);
-		*str = (*str) + nb_char;
-		*len -= nb_char;
-		data->tag->width -= nb_char;
+		*str = (*str) + 1;
+		*len -= 1;
+		data->tag->width -= 1;
 	}
 	return (1);
 }
@@ -46,7 +45,7 @@ int			pfd_add_width(t_pfd_data *data, char *str, size_t len)
 	size_t	nb_space;
 	size_t	i;
 
-	ret = pfd_manage_pound_ox_sign(data, &str, &len);
+	ret = pfd_manage_pound_ox(data, &str, &len);
 	if (ret < 0)
 		return (-1);
 	i = 0;
@@ -54,7 +53,9 @@ int			pfd_add_width(t_pfd_data *data, char *str, size_t len)
 		? (size_t)data->tag->width - len : 0);
 	while (ret > 0 && i < nb_space)
 	{
-		if (data->tag->precision == -1 && data->tag->flags & ZERO)
+		if ((data->tag->precision == -1 && data->tag->flags & ZERO)
+			|| (data->tag->precision <= 0 && data->tag->flags & ZERO
+			&& data->tag->flags & (15 << 23)))
 			ret = pfd_add_char(data, '0');
 		else
 			ret = pfd_add_char(data, ' ');

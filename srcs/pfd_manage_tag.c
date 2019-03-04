@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:06:23 by erli              #+#    #+#             */
-/*   Updated: 2019/02/27 11:59:46 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 13:31:08 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static	void	pfd_harmonize_flags(t_pfd_tag *tag)
 		tag->flags = (tag->flags & (-1 - BL_MOD));
 	if ((tag->flags & (63 << 17)) == 0)
 		tag->flags = (tag->flags & (-1 - POUND));
-	if (tag->flags & (7 << 23))
+	if (tag->flags & P_CONV)
 		tag->flags = (tag->flags & (-1 - ZERO));
 	if (tag->flags & (7 << 23) || tag->flags & (15 << 16)
 		|| tag->flags & NO_CONV)
@@ -66,6 +66,13 @@ int				pfd_manage_tag(t_pfd_data *data, char *format, va_list ap,
 	*i += 1;
 	if ((ret = pfd_read_tag(data, format, i, ap)) < 0)
 		return (-1);
+	if (tag->width < 0)
+	{
+		tag->flags = (tag->flags | MINUS) - (tag->flags & ZERO);
+		tag->width = -tag->width;
+	}
+	if (tag->precision < 0)
+		tag->precision = -1;
 	if (data->tag->flags & T_MOD || data->tag->flags & M_MOD)
 		pfd_get_row_col(data, ap);
 	pfd_harmonize_flags(data->tag);
