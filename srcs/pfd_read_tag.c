@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 18:35:16 by erli              #+#    #+#             */
-/*   Updated: 2019/03/04 10:19:54 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 10:53:47 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static	void	pfd_read_width_and_prec(t_pfd_tag *tag, char *format,
 			*i += 1;
 			tag->precision = va_arg(ap, int);
 		}
-		else if (ft_isdigit(format[*i]) > 0)
+		else
 			tag->precision = pfd_atoi(format, i);
 	}
 }

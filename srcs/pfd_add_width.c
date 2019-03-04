@@ -6,13 +6,13 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 16:52:16 by erli              #+#    #+#             */
-/*   Updated: 2019/03/04 10:46:53 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 11:42:37 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printfd.h"
 
-static	int	pfd_manage_pound_ox(t_pfd_data *data, char **str, size_t *len)
+static	int	pfd_manage_pound_ox_sign(t_pfd_data *data, char **str, size_t *len)
 {
 	size_t nb_char;
 
@@ -21,6 +21,16 @@ static	int	pfd_manage_pound_ox(t_pfd_data *data, char **str, size_t *len)
 	if (data->tag->flags & (7 << 17) && (data->tag->flags & 3) == 3)
 	{
 		nb_char = (data->tag->flags & O_CONV ? 1 : 2);
+		if (pfd_add_str(data, *str, nb_char) < 0)
+			return (-1);
+		*str = (*str) + nb_char;
+		*len -= nb_char;
+		data->tag->width -= nb_char;
+	}
+	else if (((*str)[0] == '-' || (*str)[0] == '+')
+		&& data->tag->flags & ZERO)
+	{
+		nb_char = 1;
 		if (pfd_add_str(data, *str, nb_char) < 0)
 			return (-1);
 		*str = (*str) + nb_char;
@@ -36,7 +46,7 @@ int			pfd_add_width(t_pfd_data *data, char *str, size_t len)
 	size_t	nb_space;
 	size_t	i;
 
-	ret = pfd_manage_pound_ox(data, &str, &len);
+	ret = pfd_manage_pound_ox_sign(data, &str, &len);
 	if (ret < 0)
 		return (-1);
 	i = 0;

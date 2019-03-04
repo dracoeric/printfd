@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 18:32:21 by erli              #+#    #+#             */
-/*   Updated: 2019/02/27 09:57:27 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 11:31:57 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,8 @@ static	size_t	pfd_num_total_len(t_pfd_data *data, unsigned long long nb,
 
 	total_len = (len > data->tag->precision ? len : data->tag->precision);
 	total_len += (sign == '\0' ? 0 : 1);
-	if (nb != 0 && data->tag->flags & O_CONV)
-	{
-		if ((data->tag->width > len && data->tag->flags & ZERO)
-			|| data->tag->precision > len)
+	if (nb != 0 && data->tag->flags & O_CONV && data->tag->flags & POUND)
 			total_len += 1;
-	}
 	else if (nb != 0 && data->tag->flags & (7 << 17)
 		&& data->tag->flags & POUND)
 		total_len += 2;
@@ -97,6 +93,9 @@ int				pfd_num_to_str(t_pfd_data *data, unsigned long long nb)
 	if (data->tag->flags & B_MOD)
 		return (pfd_arg_to_bin(data, &nb));
 	sign = pfd_extract_sign(data->tag->flags, &nb);
+	if (nb == 0 && data->tag->precision == 0 && data->tag->flags & O_CONV
+		&& data->tag->flags & POUND)
+		return (pfd_add_width(data, "0", 1));
 	if (nb == 0 && data->tag->precision == 0)
 		return (pfd_add_width(data, &sign, (sign == '\0' ? 0 : 1)));
 	len = pfd_num_len(data, nb);

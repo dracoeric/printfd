@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:21:45 by erli              #+#    #+#             */
-/*   Updated: 2019/03/04 10:29:10 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 11:41:58 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int			main(void)
 	char				*str;
 	int					c;
 
-	c = 542;
-	str = "%010x\n";
-	ret = printf(str, c);
-	ret1 = ft_printf(str, c);
+	c = -42;
+	str = "%05d\n";
+	ret = printf(str, c, c);
+	ret1 = ft_printf(str, c, c);
 	if (ret != ret1)
 		ft_printf("difference: ret = %d, retfd = %d\n", ret, ret1);
 	return (0);
