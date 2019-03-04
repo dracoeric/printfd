@@ -6,7 +6,7 @@
 /*   By: erli <erli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:22:53 by erli              #+#    #+#             */
-/*   Updated: 2019/03/03 11:00:55 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/04 09:50:39 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int			ft_printf(const char *format, ...)
 	data->fd = 1;
 	i = 0;
 	va_start(ap, format);
+	ret = 1;
 	while (format[i] != '\0' && ret > 0)
 	{
 		while (format[i] != '%' && format[i] != '\0' && ret > 0)
